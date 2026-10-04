@@ -1,0 +1,45 @@
+### RepoLens example requests (REST Client / httpie compatible)
+
+@baseUrl = http://localhost:8000
+@token = replace-with-jwt
+
+### Health
+GET {{baseUrl}}/api/v1/health
+
+### Register
+POST {{baseUrl}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "securepass123",
+  "email": "alice@example.com"
+}
+
+### Login
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "securepass123"
+}
+
+### Me
+GET {{baseUrl}}/api/v1/auth/me
+Authorization: Bearer {{token}}
+
+### Review repository
+POST {{baseUrl}}/api/v1/repository/review
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "repository_url": "https://github.com/psf/requests",
+  "branch": "main",
+  "review_type": "security"
+}
+
+### Get review by id
+GET {{baseUrl}}/api/v1/repository/00000000-0000-0000-0000-000000000000
+Authorization: Bearer {{token}}
